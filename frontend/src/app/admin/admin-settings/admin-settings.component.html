@@ -1,0 +1,57 @@
+<app-nav />
+
+<main class="page" data-testid="admin-settings-main">
+  <div class="page__head">
+    <div>
+      <h1>Admin · Service Settings</h1>
+      <p class="page__sub">
+        Configure credentials for provisioned services. Values are masked once
+        saved.
+      </p>
+    </div>
+  </div>
+
+  @if (saved(); as s) {
+    <p class="save-note" role="status">{{ s }} settings saved.</p>
+  }
+
+  <div class="services">
+    @for (service of services(); track service.key) {
+      <section class="service" [attr.data-testid]="'service-' + service.key">
+        <header class="service__head">
+          <div>
+            <h2 class="service__name">{{ service.label }}</h2>
+            <p class="service__desc">{{ service.description }}</p>
+          </div>
+          @if (service.configured) {
+            <span class="badge badge--ok">● Configured</span>
+          } @else {
+            <span class="badge badge--pending">● Not configured</span>
+          }
+        </header>
+
+        <form class="service__form" (ngSubmit)="save(service)">
+          @for (field of service.fields; track field.key) {
+            <div class="field">
+              <label [attr.for]="service.key + '-' + field.key">
+                {{ field.label }}
+              </label>
+              <input
+                [id]="service.key + '-' + field.key"
+                [name]="field.key"
+                type="text"
+                [placeholder]="field.masked || field.placeholder"
+                [ngModel]="field.masked"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+          }
+
+          <div class="service__actions">
+            <button type="submit" class="btn">Save {{ service.label }}</button>
+          </div>
+        </form>
+      </section>
+    }
+  </div>
+</main>

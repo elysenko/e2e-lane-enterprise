@@ -1,0 +1,31 @@
+<app-nav />
+
+<main class="page" data-testid="habit-new-main">
+  <a class="back" routerLink="/habits">‹ Back to habits</a>
+  <h1>Add a habit</h1>
+  <p class="page__sub">Give your new habit a clear, simple name.</p>
+
+  <form class="card" (ngSubmit)="create()">
+    @if (error(); as e) {
+      <p class="form-error" role="alert">{{ e }}</p>
+    }
+
+    <div class="field">
+      <label for="habit-name">Name</label>
+      <input
+        id="habit-name"
+        name="name"
+        type="text"
+        required
+        placeholder="e.g. Meditate for 10 minutes"
+        [ngModel]="name()"
+        (ngModelChange)="name.set($event)"
+      />
+    </div>
+
+    <div class="actions">
+      <a class="btn btn--ghost" routerLink="/habits">Cancel</a>
+      <button type="submit" class="btn">Create</button>
+    </div>
+  </form>
+</main>

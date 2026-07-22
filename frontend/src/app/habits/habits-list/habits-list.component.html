@@ -1,0 +1,43 @@
+<app-nav />
+
+<main class="page" data-testid="habits-main">
+  <div class="page__head">
+    <div>
+      <h1>My Habits</h1>
+      <p class="page__sub">
+        Keep the momentum — your best run is {{ bestStreak() }} days.
+      </p>
+    </div>
+    <a class="btn add-btn--desktop" routerLink="/habits/new">+ Add Habit</a>
+  </div>
+
+  @if (habits().length === 0) {
+    <div class="empty">
+      <p>No habits yet. Add your first one to get started.</p>
+      <a class="btn" routerLink="/habits/new">+ Add Habit</a>
+    </div>
+  } @else {
+    <ul class="habits">
+      @for (habit of habits(); track habit.id) {
+        <li class="habit" [attr.data-testid]="'habit-item-' + habit.id">
+          <div class="habit__body">
+            <span class="habit__name">{{ habit.name }}</span>
+            <span
+              class="habit__streak"
+              [class.habit__streak--zero]="habit.streak === 0"
+            >
+              🔥 {{ habit.streak }} day streak
+            </span>
+          </div>
+          <span class="habit__chev" aria-hidden="true">›</span>
+        </li>
+      }
+    </ul>
+  }
+</main>
+
+<!-- Primary action anchored to the bottom half for one-handed mobile use -->
+<a class="fab" routerLink="/habits/new" aria-label="Add habit">
+  <span aria-hidden="true">+</span>
+  <span class="fab__label">Add Habit</span>
+</a>

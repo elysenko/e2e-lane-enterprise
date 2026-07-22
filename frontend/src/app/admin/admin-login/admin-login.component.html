@@ -1,0 +1,52 @@
+<main class="auth">
+  <section class="auth__card auth__card--admin">
+    <div class="auth__brand">
+      <span class="auth__mark" aria-hidden="true">⚙️</span>
+      <span>Admin Console</span>
+    </div>
+    <h1 class="auth__title">Administrator sign in</h1>
+    <p class="auth__subtitle">Manage service credentials and system settings.</p>
+
+    @if (error(); as e) {
+      <p class="auth__error" role="alert">{{ e }}</p>
+    }
+
+    <form (ngSubmit)="submit()">
+      <div class="field">
+        <label for="admin-email">Admin email</label>
+        <input
+          id="admin-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="admin@example.com"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event)"
+        />
+      </div>
+
+      <div class="field">
+        <label for="admin-password">Password</label>
+        <input
+          id="admin-password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="••••••••"
+          [ngModel]="password()"
+          (ngModelChange)="password.set($event)"
+        />
+      </div>
+
+      <button type="submit" class="btn btn--block">Sign in as admin</button>
+    </form>
+
+    <button type="button" class="auth__demo" (click)="demo()">
+      Skip login — Demo Admin
+    </button>
+
+    <p class="auth__switch">
+      Not an admin? <a routerLink="/login">Member sign in</a>
+    </p>
+  </section>
+</main>

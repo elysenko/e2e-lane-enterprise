@@ -1,0 +1,21 @@
+{
+  "testids": [
+    "about-main",
+    "admin-settings-main",
+    "app-ready",
+    "habit-item-",
+    "habit-new-main",
+    "habits-main",
+    "service-"
+  ],
+  "headings": [
+    "About Habit Tracker",
+    "Add a habit",
+    "Admin \\xB7 Service Settings",
+    "Administrator sign in",
+    "Create your account",
+    "My Habits",
+    "Welcome back"
+  ],
+  "source_dir": "/workspace/mockups/3d1222a6-f7ff-474b-b129-0f0f856b1c0a"
+}

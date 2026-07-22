@@ -1,0 +1,135 @@
+.page {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5) calc(var(--space-8) + 80px);
+}
+
+.page__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.page__head h1 {
+  font-size: var(--font-size-2xl);
+}
+
+.page__sub {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.habits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.habit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 64px;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s ease, transform 0.05s ease;
+}
+
+.habit:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.habit:active {
+  transform: scale(0.995);
+  background: var(--color-surface-alt);
+}
+
+.habit__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+.habit__name {
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+}
+
+.habit__streak {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  align-self: flex-start;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.habit__streak--zero {
+  background: var(--color-surface-alt);
+  color: var(--color-text-muted);
+}
+
+.habit__chev {
+  color: var(--color-border-strong);
+  font-size: var(--font-size-xl);
+}
+
+.empty {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+}
+
+.empty p {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+/* Floating action button — mobile only, bottom half of screen */
+.fab {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .add-btn--desktop {
+    display: none;
+  }
+
+  .fab {
+    position: fixed;
+    right: var(--space-5);
+    bottom: calc(72px + var(--safe-bottom));
+    z-index: 25;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 52px;
+    padding: 0 var(--space-5);
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+    color: var(--color-primary-contrast);
+    font-weight: 700;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .fab:active {
+    transform: scale(0.97);
+  }
+
+  .fab__label {
+    font-size: var(--font-size-base);
+  }
+}
