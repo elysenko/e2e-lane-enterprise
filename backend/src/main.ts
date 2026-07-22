@@ -19,8 +19,8 @@ async function bootstrap(): Promise<void> {
   });
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Template Enterprise API')
-    .setDescription('NestJS + tRPC backend API')
+    .setTitle('Habit Tracker API')
+    .setDescription('NestJS + Prisma REST backend API')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -32,7 +32,6 @@ async function bootstrap(): Promise<void> {
   await app.listen(port);
   logger.log(`Application running on http://localhost:${port}`);
   logger.log(`Swagger docs at http://localhost:${port}/api/docs`);
-  logger.log(`tRPC endpoint at http://localhost:${port}/trpc`);
 }
 
 bootstrap();
