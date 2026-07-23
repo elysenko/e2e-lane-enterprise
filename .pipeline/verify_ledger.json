@@ -12,8 +12,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -29,8 +29,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -46,8 +46,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -61,11 +61,11 @@
       "pattern": "deep",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -79,11 +79,11 @@
       "pattern": "HealthCheckService|@nestjs/terminus",
       "expect": "absent"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -99,8 +99,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -116,8 +116,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -134,8 +134,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -152,8 +152,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -184,9 +184,9 @@
     },
     "status": "open",
     "raised_attempt": 2,
-    "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "times_raised": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -201,9 +201,9 @@
     },
     "status": "open",
     "raised_attempt": 2,
-    "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "times_raised": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -218,9 +218,9 @@
     },
     "status": "open",
     "raised_attempt": 2,
-    "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "times_raised": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -234,11 +234,11 @@
       "pattern": "deep",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 2,
     "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -252,11 +252,11 @@
       "pattern": "HealthCheckService|@nestjs/terminus",
       "expect": "absent"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 2,
-    "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "times_raised": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -271,9 +271,9 @@
     },
     "status": "open",
     "raised_attempt": 2,
-    "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "times_raised": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -288,9 +288,9 @@
     },
     "status": "open",
     "raised_attempt": 2,
-    "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "times_raised": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -306,9 +306,9 @@
     },
     "status": "open",
     "raised_attempt": 2,
-    "times_raised": 1,
-    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
-    "patched_attempt": 2,
+    "times_raised": 2,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -327,5 +327,40 @@
     "times_raised": 1,
     "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
     "patched_attempt": 2
+  },
+  {
+    "id": "a3-4",
+    "category": "missing_feature",
+    "file": "backend/src/health/health.controller.ts",
+    "description": "No GET /api/health/deep endpoint exists to satisfy the plan's deep health check requirement, even though habits.service.ts now has a usable ping() method.",
+    "check": {
+      "kind": "grep",
+      "file": "backend/src/health/health.controller.ts",
+      "pattern": "deep",
+      "expect": "present"
+    },
+    "status": "fixed",
+    "raised_attempt": 3,
+    "times_raised": 1,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3
+  },
+  {
+    "id": "a3-9",
+    "category": "wrong_behavior",
+    "file": "frontend/src/app/app.routes.ts",
+    "description": "Routing remains Angular client-side SPA routing rather than real server-rendered URLs as the plan requires, though the forbidden login/signup/admin routes have been removed.",
+    "check": {
+      "kind": "grep",
+      "file": "frontend/src/app/app.routes.ts",
+      "pattern": "loadComponent",
+      "expect": "absent"
+    },
+    "status": "open",
+    "raised_attempt": 3,
+    "times_raised": 1,
+    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
+    "patched_attempt": 3,
+    "reopen_reason": "deterministic check failed after patch"
   }
 ]

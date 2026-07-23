@@ -1,0 +1,17 @@
+{
+  "name": "e2e-lane-enterprise",
+  "version": "1.0.0",
+  "description": "Server-rendered habit tracker (Express + EJS + SQLite).",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0"
+  }
+}
