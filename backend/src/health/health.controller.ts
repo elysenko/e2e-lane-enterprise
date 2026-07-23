@@ -1,36 +1,34 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
 import {
-  HealthCheck,
-  HealthCheckService,
-  HealthCheckResult,
-  HealthCheckError,
-  HealthIndicatorResult,
-} from '@nestjs/terminus';
+  Controller,
+  Get,
+  HttpCode,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { PrismaService } from '../prisma/prisma.service';
 
 @ApiTags('health')
 @Controller('health')
 export class HealthController {
-  constructor(
-    private readonly health: HealthCheckService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   @Get()
-  @HealthCheck()
-  check(): Promise<HealthCheckResult> {
-    return this.health.check([() => this.checkDatabase()]);
+  @HttpCode(HttpStatus.OK)
+  check(): { status: string } {
+    return { status: 'ok' };
   }
 
-  private async checkDatabase(): Promise<HealthIndicatorResult> {
+  @Get('deep')
+  async deep(): Promise<{ status: string; db: string }> {
     try {
       await this.prisma.$queryRaw`SELECT 1`;
-      return { database: { status: 'up' } };
+      return { status: 'ok', db: 'ok' };
     } catch (error) {
-      throw new HealthCheckError('Database check failed', {
-        database: { status: 'down', message: String(error) },
-      });
+      throw new HttpException(
+        { status: 'error', db: 'down', message: String(error) },
+        HttpStatus.SERVICE_UNAVAILABLE,
+      );
     }
   }
 }
