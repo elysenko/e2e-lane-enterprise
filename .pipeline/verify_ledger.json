@@ -1,0 +1,175 @@
+[
+  {
+    "id": "a1-1",
+    "category": "wrong_file",
+    "file": "package.json",
+    "description": "Plan Step 1 requires a root package.json declaring express, ejs, better-sqlite3 and a start script node src/server.js, but no such file exists; separate frontend/backend Angular+NestJS package.json files were created instead.",
+    "check": {
+      "kind": "file_exists",
+      "file": "package.json",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 1,
+    "times_raised": 1,
+    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
+    "patched_attempt": 1,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a1-2",
+    "category": "missing_feature",
+    "file": "src/db.js",
+    "description": "Plan Step 2 requires a SQLite data layer (src/db.js) with listHabits/addHabit/ping helpers and a 3-habit seed, but no SQLite is used anywhere; Prisma/PostgreSQL is used instead and no file at this path exists.",
+    "check": {
+      "kind": "file_exists",
+      "file": "src/db.js",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 1,
+    "times_raised": 1,
+    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
+    "patched_attempt": 1,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a1-3",
+    "category": "missing_feature",
+    "file": "src/server.js",
+    "description": "Plan Step 3 requires an Express app with a BASE_PATH/url() helper and root-relative GET/POST routes serving HTML, but this file does not exist; routes were implemented instead as an Angular client-side router plus a separate JSON REST API under /api/habits.",
+    "check": {
+      "kind": "file_exists",
+      "file": "src/server.js",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 1,
+    "times_raised": 1,
+    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
+    "patched_attempt": 1,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a1-4",
+    "category": "missing_feature",
+    "file": "backend/src/health/health.controller.ts",
+    "description": "Plan Step 4 requires a GET /api/health/deep endpoint returning {status:'ok',db:'ok'} or 503 via a db.ping() check, but no /api/health/deep route exists anywhere in the backend.",
+    "check": {
+      "kind": "grep",
+      "file": "backend/src/health/health.controller.ts",
+      "pattern": "deep",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 1,
+    "times_raised": 1,
+    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
+    "patched_attempt": 1,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a1-5",
+    "category": "wrong_behavior",
+    "file": "backend/src/health/health.controller.ts",
+    "description": "Plan Step 4 requires GET /api/health to return exactly {status:'ok'}, but the implemented route uses @nestjs/terminus and returns a nested {status, info, error, details} shape instead.",
+    "check": {
+      "kind": "grep",
+      "file": "backend/src/health/health.controller.ts",
+      "pattern": "HealthCheckService|@nestjs/terminus",
+      "expect": "absent"
+    },
+    "status": "open",
+    "raised_attempt": 1,
+    "times_raised": 1,
+    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
+    "patched_attempt": 1,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a1-6",
+    "category": "missing_feature",
+    "file": "views/habits.ejs",
+    "description": "Plan Step 5 requires server-rendered EJS views (views/layout.ejs, habits.ejs, new.ejs, about.ejs); none exist, replaced entirely by client-rendered Angular components.",
+    "check": {
+      "kind": "file_exists",
+      "file": "views/habits.ejs",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 1,
+    "times_raised": 1,
+    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
+    "patched_attempt": 1,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a1-7",
+    "category": "missing_feature",
+    "file": "public/styles.css",
+    "description": "Plan Step 6 requires public/styles.css for the server-rendered app; it does not exist, replaced by Angular's own styles.css/tokens.css and per-component CSS files.",
+    "check": {
+      "kind": "file_exists",
+      "file": "public/styles.css",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 1,
+    "times_raised": 1,
+    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
+    "patched_attempt": 1,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a1-8",
+    "category": "wrong_behavior",
+    "file": "Dockerfile",
+    "description": "Plan Step 7 requires a single node:20-alpine stage running node src/server.js directly on 8080, but the Dockerfile builds and runs an entirely different multi-stage Angular+NestJS+nginx+supervisord container.",
+    "check": {
+      "kind": "grep",
+      "file": "Dockerfile",
+      "pattern": "CMD \\[\"node\",\"src/server.js\"\\]",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 1,
+    "times_raised": 1,
+    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
+    "patched_attempt": 1,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a1-9",
+    "category": "wrong_behavior",
+    "file": "frontend/src/app/app.routes.ts",
+    "description": "Plan's core assumption is a server-rendered app where each route (/habits, /habits/new, /about) is a real addressable URL without client routing, but the implementation uses Angular's client-side Router (RouterLink/routerLink) for an SPA, so a plain HTTP GET without executing JS returns only an empty app-root shell rather than real page content.",
+    "check": {
+      "kind": "grep",
+      "file": "frontend/src/index.html",
+      "pattern": "<h1>My Habits</h1>",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 1,
+    "times_raised": 1,
+    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
+    "patched_attempt": 1,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a1-10",
+    "category": "wrong_behavior",
+    "file": "frontend/src/app/auth/login/login.component.ts",
+    "description": "Plan explicitly states no authentication (no login, roles, guards, or admin) should exist, but the app ships login, signup, admin-login, and admin-settings flows with a User/role model and admin guard.",
+    "check": {
+      "kind": "file_exists",
+      "file": "frontend/src/app/auth/login/login.component.ts",
+      "expect": "absent"
+    },
+    "status": "fixed",
+    "raised_attempt": 1,
+    "times_raised": 1,
+    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
+    "patched_attempt": 1
+  }
+]

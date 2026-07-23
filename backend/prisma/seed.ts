@@ -1,30 +1,28 @@
-import { PrismaClient, Role } from '@prisma/client';
-import { createHash } from 'crypto';
+import { PrismaClient } from '@prisma/client';
 
+/**
+ * Dev seed (TypeScript). The production seed is prisma/seed/seed.js (plain node).
+ *
+ * The app has NO authentication (per spec) — no users or credentials. This
+ * seeds the three example habits so `/habits` is never empty. Idempotent: it
+ * only inserts when the habits table is empty.
+ */
 const prisma = new PrismaClient();
 
-function derivePassword(email: string): string {
-  return createHash('sha256')
-    .update(email + (process.env.SEED_SECRET || 'colossus-seed'))
-    .digest('hex')
-    .slice(0, 16);
-}
-
-const SEED_USERS: Array<{ email: string; name: string; role: Role }> = [
-  { email: 'admin@example.com',   name: 'Admin User',   role: Role.ADMIN },
-  { email: 'user@example.com',    name: 'Regular User', role: Role.USER  },
+const SEED_HABITS: Array<{ name: string; streak: number }> = [
+  { name: 'Drink water', streak: 5 },
+  { name: 'Read 20 minutes', streak: 2 },
+  { name: 'Morning walk', streak: 0 },
 ];
 
 async function main(): Promise<void> {
-  for (const u of SEED_USERS) {
-    const password = derivePassword(u.email);
-    await prisma.user.upsert({
-      where:  { email: u.email },
-      update: { name: u.name, role: u.role },
-      create: { email: u.email, name: u.name, role: u.role },
-    });
-    console.log(`SEED_CRED ${u.role} ${u.email} ${password}`);
+  const count = await prisma.habit.count();
+  if (count > 0) {
+    console.log(`Habits already present (${count}); skipping seed.`);
+    return;
   }
+  await prisma.habit.createMany({ data: SEED_HABITS });
+  console.log(`Seeded ${SEED_HABITS.length} example habits`);
 }
 
 main()

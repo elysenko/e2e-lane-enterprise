@@ -1,18 +1,10 @@
 import { Routes } from '@angular/router';
 
+// No authentication (per spec): every route is public and there is no
+// login / signup / admin surface. Each app state has its own URL so it is
+// deep-linkable (habit list, add-habit form, about page).
 export const routes: Routes = [
-  // No authentication (per spec): the root URL lands directly on the habit list.
   { path: '', pathMatch: 'full', redirectTo: 'habits' },
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('./auth/login/login.component').then((m) => m.LoginComponent),
-  },
-  {
-    path: 'signup',
-    loadComponent: () =>
-      import('./auth/signup/signup.component').then((m) => m.SignupComponent),
-  },
   {
     path: 'habits',
     loadComponent: () =>
@@ -31,20 +23,6 @@ export const routes: Routes = [
     path: 'about',
     loadComponent: () =>
       import('./about/about.component').then((m) => m.AboutComponent),
-  },
-  {
-    path: 'admin/login',
-    loadComponent: () =>
-      import('./admin/admin-login/admin-login.component').then(
-        (m) => m.AdminLoginComponent,
-      ),
-  },
-  {
-    path: 'admin/settings',
-    loadComponent: () =>
-      import('./admin/admin-settings/admin-settings.component').then(
-        (m) => m.AdminSettingsComponent,
-      ),
   },
   { path: '**', redirectTo: 'habits' },
 ];

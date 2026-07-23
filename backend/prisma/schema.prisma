@@ -8,20 +8,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
-  role      Role     @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-enum Role {
-  USER
-  ADMIN
-}
-
+// The app has no authentication (per spec): no User/Role models. The only
+// persisted entity is a habit with its current streak.
 model Habit {
   id        String   @id @default(cuid())
   name      String
