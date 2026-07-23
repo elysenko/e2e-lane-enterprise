@@ -1,39 +1,54 @@
 # syntax=docker/dockerfile:1
-# Minimal static nginx image — the repo contains no application source, so we
-# serve a small placeholder page. This still lets the deploy pipeline verify
-# the full build → push → deploy → ingress → smoke-test path end-to-end.
-FROM nginx:1.27-alpine
+# Combined single-container image deployed by k8s/deployment.yaml
+# (image: e2e-lane-enterprise, Service :80 -> targetPort :8080).
+#
+#   - Angular 19 SPA, served by nginx on :8080
+#   - NestJS + Prisma REST backend on :3000, reached via nginx at /api/*
+#
+# nginx and the backend run together under supervisord
+# (serve_topology: nginx_frontend_plus_backend_supervisor). The ingress routes
+# https://<host>/e2e-lane-enterprise/* to this pod and strips the prefix, so the
+# SPA is built with --base-href=/e2e-lane-enterprise/ and nginx serves at root.
 
-# Nginx config: listen on 8080 (matches the port the Service targets), serve
-# /usr/share/nginx/html with a simple SPA-style try_files fallback so any path
-# returns the placeholder index.
-RUN printf '%s\n' \
-    'server {' \
-    '    listen 8080;' \
-    '    server_name _;' \
-    '    root /usr/share/nginx/html;' \
-    '    index index.html;' \
-    '    location / {' \
-    '        try_files $uri $uri/ /index.html;' \
-    '    }' \
-    '}' > /etc/nginx/conf.d/default.conf \
- && rm -f /etc/nginx/conf.d/default.conf.bak
+# ---------- Stage 1: build the Angular frontend ----------
+FROM node:20-alpine AS frontend-build
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend/ ./
+# base-href must match the ingress path prefix so browser asset + API URLs
+# resolve back through the ingress to this pod.
+RUN npx ng build --configuration production --base-href=/e2e-lane-enterprise/
 
-# Placeholder index.html — makes it obvious this is a bare template repo,
-# not a broken deploy.
-RUN printf '%s\n' \
-    '<!doctype html>' \
-    '<html lang="en">' \
-    '<head><meta charset="utf-8"><title>e2e-lane-enterprise</title>' \
-    '<meta name="viewport" content="width=device-width,initial-scale=1">' \
-    '<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:4rem auto;padding:0 1rem;color:#111}code{background:#f4f4f5;padding:.1rem .3rem;border-radius:.2rem}</style>' \
-    '</head>' \
-    '<body>' \
-    '<h1>e2e-lane-enterprise</h1>' \
-    '<p>This repository is a bare template — no application source has been committed yet.</p>' \
-    '<p>The Colossus deploy pipeline built and served this placeholder to verify the end-to-end path (build → push → ingress → smoke test).</p>' \
-    '<p>Push application code to <code>main</code> to replace this page.</p>' \
-    '</body></html>' > /usr/share/nginx/html/index.html
+# ---------- Stage 2: build the NestJS backend ----------
+FROM node:20-alpine AS backend-build
+WORKDIR /app/backend
+COPY backend/package*.json ./
+RUN npm ci
+COPY backend/ ./
+RUN npx prisma generate
+# Compile with tsc directly (deterministic emit to ./dist/main.js).
+RUN npx tsc -p tsconfig.build.json
+
+# ---------- Stage 3: runtime ----------
+FROM node:20-alpine AS runtime
+ENV NODE_ENV=production
+RUN apk add --no-cache nginx supervisor \
+    && mkdir -p /run/nginx /usr/share/nginx/html
+
+# Frontend static assets (Angular application builder emits to dist/frontend/browser).
+COPY --from=frontend-build /app/frontend/dist/frontend/browser /usr/share/nginx/html
+
+# Backend runtime: compiled output, deps, generated Prisma client + schema.
+WORKDIR /app/backend
+COPY --from=backend-build /app/backend/dist ./dist
+COPY --from=backend-build /app/backend/node_modules ./node_modules
+COPY --from=backend-build /app/backend/prisma ./prisma
+COPY --from=backend-build /app/backend/package*.json ./
+
+# nginx + supervisor configuration.
+COPY docker/nginx.conf /etc/nginx/http.d/default.conf
+COPY docker/supervisord.conf /etc/supervisord.conf
 
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]

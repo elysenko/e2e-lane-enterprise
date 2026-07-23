@@ -1,5 +1,5 @@
 {
   "ready_testid": "app-ready",
-  "expect_text": [],
-  "reject_signatures": ["home-title\">Users<", "Loading...", "Failed to load users."]
+  "expect_text": ["my habits", "keep the momentum"],
+  "reject_signatures": ["home-title\">Users<", "Loading...", "Failed to load users.", "This repository is a bare template"]
 }

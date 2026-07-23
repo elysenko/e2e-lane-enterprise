@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  // No authentication (per spec): the root URL lands directly on the habit list.
+  { path: '', pathMatch: 'full', redirectTo: 'habits' },
   {
     path: 'login',
     loadComponent: () =>
@@ -45,5 +46,5 @@ export const routes: Routes = [
         (m) => m.AdminSettingsComponent,
       ),
   },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: 'habits' },
 ];
