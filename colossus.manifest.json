@@ -1,0 +1,13 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "method": "dockerfile",
+    "port": 8080
+  },
+  "env": {
+    "required": []
+  },
+  "name": "e2e-lane-enterprise",
+  "run": {},
+  "schemaVersion": 1
+}
