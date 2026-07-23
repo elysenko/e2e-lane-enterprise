@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NavComponent } from '../../shared/nav/nav.component';
+import { HabitsApi } from '../../shared/api/habits-api.service';
 
 @Component({
   selector: 'app-habit-new',
@@ -13,18 +14,31 @@ import { NavComponent } from '../../shared/nav/nav.component';
 })
 export class HabitNewComponent {
   private readonly router = inject(Router);
+  private readonly habitsApi = inject(HabitsApi);
 
   name = signal('');
   error = signal<string | null>(null);
+  submitting = signal(false);
 
-  create(): void {
-    if (!this.name().trim()) {
+  async create(): Promise<void> {
+    const name = this.name().trim();
+    if (!name) {
       this.error.set('Please enter a habit name.');
       return;
     }
+    if (this.submitting()) {
+      return;
+    }
     this.error.set(null);
-    // In the mockup, creation navigates back to the list. The backend POST
-    // /habits handler + redirect is wired by the service_agent stage.
-    this.router.navigate(['/habits']);
+    this.submitting.set(true);
+    try {
+      // POST /api/habits, then navigate back to the list which reloads live.
+      await this.habitsApi.addHabit(name);
+      this.router.navigate(['/habits']);
+    } catch {
+      this.error.set('Could not create habit. Please try again.');
+    } finally {
+      this.submitting.set(false);
+    }
   }
 }

@@ -10,6 +10,12 @@ async function bootstrap(): Promise<void> {
     logger: ['log', 'error', 'warn', 'debug', 'verbose'],
   });
 
+  // Serve every REST route under `/api` so it matches the stack glue contract
+  // (`frontend_api_base: "/api"`). The Angular client calls `/api/habits` and
+  // both the dev `ng serve` proxy and the prod nginx sidecar forward `/api/*`
+  // to this service unchanged — no per-environment path rewriting needed.
+  app.setGlobalPrefix('api');
+
   const frontendUrl = process.env.FRONTEND_URL ?? 'http://localhost:4200';
   app.enableCors({
     origin: frontendUrl,

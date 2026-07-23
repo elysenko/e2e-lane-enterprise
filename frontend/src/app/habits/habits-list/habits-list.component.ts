@@ -1,7 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NavComponent } from '../../shared/nav/nav.component';
 import { Habit } from '../../core/models';
+import { HabitsApi } from '../../shared/api/habits-api.service';
 
 @Component({
   selector: 'app-habits-list',
@@ -11,17 +19,25 @@ import { Habit } from '../../core/models';
   styleUrl: './habits-list.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HabitsListComponent {
-  // Seed data mirrors the backend's seed-on-start rows. Declared as a
-  // signal<Habit[]> so mockup_cleaner can empty it and service_agent can
-  // wire it to listHabits() via the API.
-  habits = signal<Habit[]>([
-    { id: '1', name: 'Drink water', streak: 5, created_at: '2026-07-20' },
-    { id: '2', name: 'Read 20 minutes', streak: 2, created_at: '2026-07-21' },
-    { id: '3', name: 'Morning walk', streak: 0, created_at: '2026-07-22' },
-  ]);
+export class HabitsListComponent implements OnInit {
+  private readonly habitsApi = inject(HabitsApi);
+
+  // Populated from GET /api/habits on init. Starts empty (the template shows an
+  // empty state); the backend seeds three example habits on first start so the
+  // live list is never blank after a fresh deploy.
+  habits = signal<Habit[]>([]);
+  error = signal<string | null>(null);
 
   bestStreak = computed(() =>
     this.habits().reduce((max, h) => Math.max(max, h.streak), 0),
   );
+
+  async ngOnInit(): Promise<void> {
+    try {
+      this.habits.set(await this.habitsApi.listHabits());
+    } catch {
+      this.error.set('Could not load habits.');
+      this.habits.set([]);
+    }
+  }
 }
