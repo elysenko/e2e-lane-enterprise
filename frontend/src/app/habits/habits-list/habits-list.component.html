@@ -8,13 +8,13 @@
         Keep the momentum — your best run is {{ bestStreak() }} days.
       </p>
     </div>
-    <a class="btn add-btn--desktop" routerLink="/habits/new">+ Add Habit</a>
+    <a class="btn add-btn--desktop" routerLink="/habits/new">+ New Habit</a>
   </div>
 
   @if (habits().length === 0) {
     <div class="empty">
       <p>No habits yet. Add your first one to get started.</p>
-      <a class="btn" routerLink="/habits/new">+ Add Habit</a>
+      <a class="btn" routerLink="/habits/new">+ New Habit</a>
     </div>
   } @else {
     <ul class="habits">
@@ -37,7 +37,7 @@
 </main>
 
 <!-- Primary action anchored to the bottom half for one-handed mobile use -->
-<a class="fab" routerLink="/habits/new" aria-label="Add habit">
+<a class="fab" routerLink="/habits/new" aria-label="New habit">
   <span aria-hidden="true">+</span>
-  <span class="fab__label">Add Habit</span>
+  <span class="fab__label">New Habit</span>
 </a>
