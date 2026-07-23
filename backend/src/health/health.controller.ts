@@ -1,36 +1,37 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
 import {
-  HealthCheck,
-  HealthCheckService,
-  HealthCheckResult,
-  HealthCheckError,
-  HealthIndicatorResult,
-} from '@nestjs/terminus';
-import { PrismaService } from '../prisma/prisma.service';
+  Controller,
+  Get,
+  ServiceUnavailableException,
+} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { HabitsService } from '../habits/habits.service';
 
 @ApiTags('health')
 @Controller('health')
 export class HealthController {
-  constructor(
-    private readonly health: HealthCheckService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly habits: HabitsService) {}
 
+  /**
+   * Liveness probe. Returns the exact `{ status: 'ok' }` shape the deploy
+   * pipeline smoke-test expects — no dependency checks, always cheap.
+   */
   @Get()
-  @HealthCheck()
-  check(): Promise<HealthCheckResult> {
-    return this.health.check([() => this.checkDatabase()]);
+  check(): { status: string } {
+    return { status: 'ok' };
   }
 
-  private async checkDatabase(): Promise<HealthIndicatorResult> {
+  /**
+   * Readiness / deep probe. Runs a trivial `SELECT 1` via HabitsService.ping()
+   * to confirm database connectivity. Returns `{ status: 'ok', db: 'ok' }` on
+   * success or a 503 (ServiceUnavailable) when the database is unreachable.
+   */
+  @Get('deep')
+  async deep(): Promise<{ status: string; db: string }> {
     try {
-      await this.prisma.$queryRaw`SELECT 1`;
-      return { database: { status: 'up' } };
-    } catch (error) {
-      throw new HealthCheckError('Database check failed', {
-        database: { status: 'down', message: String(error) },
-      });
+      await this.habits.ping();
+      return { status: 'ok', db: 'ok' };
+    } catch {
+      throw new ServiceUnavailableException({ status: 'error', db: 'down' });
     }
   }
 }

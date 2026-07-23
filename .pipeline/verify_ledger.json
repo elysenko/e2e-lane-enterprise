@@ -12,8 +12,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
-    "patched_attempt": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -29,8 +29,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
-    "patched_attempt": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -46,8 +46,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
-    "patched_attempt": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -64,8 +64,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
-    "patched_attempt": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -82,8 +82,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
-    "patched_attempt": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -99,8 +99,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
-    "patched_attempt": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -116,8 +116,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
-    "patched_attempt": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -134,8 +134,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
-    "patched_attempt": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -152,8 +152,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
-    "patched_attempt": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -171,5 +171,161 @@
     "times_raised": 1,
     "fixed_by_commit": "425283082e4b392a9200065ff70783e26ff20218",
     "patched_attempt": 1
+  },
+  {
+    "id": "a2-1",
+    "category": "wrong_file",
+    "file": "package.json",
+    "description": "No root package.json declaring express, ejs, better-sqlite3 with a start script exists; separate Angular/NestJS package.json files are used instead.",
+    "check": {
+      "kind": "file_exists",
+      "file": "package.json",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 2,
+    "times_raised": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a2-2",
+    "category": "missing_feature",
+    "file": "src/db.js",
+    "description": "No SQLite data layer exists at src/db.js; the app uses Prisma/PostgreSQL instead of the plan's SQLite design.",
+    "check": {
+      "kind": "file_exists",
+      "file": "src/db.js",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 2,
+    "times_raised": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a2-3",
+    "category": "missing_feature",
+    "file": "src/server.js",
+    "description": "No Express app with BASE_PATH url() helper and root-relative routes exists; routing is Angular client-side plus a JSON REST API instead.",
+    "check": {
+      "kind": "file_exists",
+      "file": "src/server.js",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 2,
+    "times_raised": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a2-4",
+    "category": "missing_feature",
+    "file": "backend/src/health/health.controller.ts",
+    "description": "No GET /api/health/deep endpoint exists to satisfy the plan's deep health check requirement.",
+    "check": {
+      "kind": "grep",
+      "file": "backend/src/health/health.controller.ts",
+      "pattern": "deep",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 2,
+    "times_raised": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a2-5",
+    "category": "wrong_behavior",
+    "file": "backend/src/health/health.controller.ts",
+    "description": "GET /api/health returns a nested nestjs/terminus shape instead of the exact {status:'ok'} body the plan requires.",
+    "check": {
+      "kind": "grep",
+      "file": "backend/src/health/health.controller.ts",
+      "pattern": "HealthCheckService|@nestjs/terminus",
+      "expect": "absent"
+    },
+    "status": "open",
+    "raised_attempt": 2,
+    "times_raised": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a2-6",
+    "category": "missing_feature",
+    "file": "views/habits.ejs",
+    "description": "No server-rendered EJS views directory exists at all; UI is fully client-rendered Angular components.",
+    "check": {
+      "kind": "file_exists",
+      "file": "views/habits.ejs",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 2,
+    "times_raised": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a2-7",
+    "category": "missing_feature",
+    "file": "public/styles.css",
+    "description": "No public/styles.css exists for the server-rendered app; replaced entirely by Angular's own stylesheets.",
+    "check": {
+      "kind": "file_exists",
+      "file": "public/styles.css",
+      "expect": "present"
+    },
+    "status": "open",
+    "raised_attempt": 2,
+    "times_raised": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a2-8",
+    "category": "wrong_behavior",
+    "file": "Dockerfile",
+    "description": "Dockerfile still builds a multi-stage Angular+NestJS+nginx+supervisord image instead of a single node:20-alpine stage running node src/server.js on 8080.",
+    "check": {
+      "kind": "grep",
+      "file": "Dockerfile",
+      "pattern": "supervisord|nginx",
+      "expect": "absent"
+    },
+    "status": "open",
+    "raised_attempt": 2,
+    "times_raised": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2,
+    "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a2-9",
+    "category": "wrong_behavior",
+    "file": "frontend/src/app/app.routes.ts",
+    "description": "Routing remains Angular client-side SPA routing and still wires up forbidden login/signup/admin routes rather than real server-rendered URLs with no auth surface.",
+    "check": {
+      "kind": "grep",
+      "file": "frontend/src/app/app.routes.ts",
+      "pattern": "admin/login|admin/settings|'login'|'signup'",
+      "expect": "absent"
+    },
+    "status": "fixed",
+    "raised_attempt": 2,
+    "times_raised": 1,
+    "fixed_by_commit": "450c5295e65dc6740fe5f8318c9cc6a4ef407cef",
+    "patched_attempt": 2
   }
 ]
