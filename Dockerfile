@@ -1,34 +1,54 @@
 # syntax=docker/dockerfile:1
-# Single-container image deployed by k8s/deployment.yaml
+# Combined single-container image deployed by k8s/deployment.yaml
 # (image: e2e-lane-enterprise, Service :80 -> targetPort :8080).
 #
-# Server-rendered habit tracker: Node 20 + Express + EJS, SQLite storage.
-# The ingress routes https://<host>/e2e-lane-enterprise/* to this pod and strips
-# the prefix; the app prefixes every rendered link/form/asset via BASE_PATH.
+#   - Angular 19 SPA, served by nginx on :8080
+#   - NestJS + Prisma REST backend on :3000, reached via nginx at /api/*
+#
+# nginx and the backend run together under supervisord
+# (serve_topology: nginx_frontend_plus_backend_supervisor). The ingress routes
+# https://<host>/e2e-lane-enterprise/* to this pod and strips the prefix, so the
+# SPA is built with --base-href=/e2e-lane-enterprise/ and nginx serves at root.
 
-FROM node:20-alpine
+# ---------- Stage 1: build the Angular frontend ----------
+FROM node:20-alpine AS frontend-build
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend/ ./
+# base-href must match the ingress path prefix so browser asset + API URLs
+# resolve back through the ingress to this pod.
+RUN npx ng build --configuration production --base-href=/e2e-lane-enterprise/
 
-# better-sqlite3 ships prebuilt binaries for common platforms, but keep the
-# build toolchain available so `npm install` can compile from source if needed.
-RUN apk add --no-cache python3 make g++
+# ---------- Stage 2: build the NestJS backend ----------
+FROM node:20-alpine AS backend-build
+WORKDIR /app/backend
+COPY backend/package*.json ./
+RUN npm ci
+COPY backend/ ./
+RUN npx prisma generate
+# Compile with tsc directly (deterministic emit to ./dist/main.js).
+RUN npx tsc -p tsconfig.build.json
 
-WORKDIR /app
+# ---------- Stage 3: runtime ----------
+FROM node:20-alpine AS runtime
+ENV NODE_ENV=production
+RUN apk add --no-cache nginx supervisor \
+    && mkdir -p /run/nginx /usr/share/nginx/html
 
-# Install production dependencies first for better layer caching.
-COPY package*.json ./
-RUN npm install --omit=dev
+# Frontend static assets (Angular application builder emits to dist/frontend/browser).
+COPY --from=frontend-build /app/frontend/dist/frontend/browser /usr/share/nginx/html
 
-# Application source.
-COPY src ./src
-COPY views ./views
-COPY public ./public
+# Backend runtime: compiled output, deps, generated Prisma client + schema.
+WORKDIR /app/backend
+COPY --from=backend-build /app/backend/dist ./dist
+COPY --from=backend-build /app/backend/node_modules ./node_modules
+COPY --from=backend-build /app/backend/prisma ./prisma
+COPY --from=backend-build /app/backend/package*.json ./
 
-# Writable location for the ephemeral SQLite database.
-RUN mkdir -p /app/data
-ENV NODE_ENV=production \
-    BASE_PATH=/e2e-lane-enterprise \
-    PORT=8080 \
-    DB_PATH=/app/data/habits.db
+# nginx + supervisor configuration.
+COPY docker/nginx.conf /etc/nginx/http.d/default.conf
+COPY docker/supervisord.conf /etc/supervisord.conf
 
 EXPOSE 8080
-CMD ["node", "src/server.js"]
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]

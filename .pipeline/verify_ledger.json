@@ -9,11 +9,11 @@
       "file": "package.json",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -26,11 +26,11 @@
       "file": "src/db.js",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -43,11 +43,11 @@
       "file": "src/server.js",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -96,11 +96,11 @@
       "file": "views/habits.ejs",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -113,11 +113,11 @@
       "file": "public/styles.css",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -134,8 +134,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -152,8 +152,8 @@
     "status": "open",
     "raised_attempt": 1,
     "times_raised": 1,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -182,11 +182,11 @@
       "file": "package.json",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 2,
     "times_raised": 2,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -199,11 +199,11 @@
       "file": "src/db.js",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 2,
-    "times_raised": 2,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "times_raised": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -216,11 +216,11 @@
       "file": "src/server.js",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 2,
-    "times_raised": 2,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "times_raised": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -269,11 +269,11 @@
       "file": "views/habits.ejs",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 2,
-    "times_raised": 2,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "times_raised": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -286,11 +286,11 @@
       "file": "public/styles.css",
       "expect": "present"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 2,
-    "times_raised": 2,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "times_raised": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -304,11 +304,11 @@
       "pattern": "supervisord|nginx",
       "expect": "absent"
     },
-    "status": "open",
+    "status": "fixed",
     "raised_attempt": 2,
-    "times_raised": 2,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "times_raised": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
   },
   {
@@ -359,8 +359,41 @@
     "status": "open",
     "raised_attempt": 3,
     "times_raised": 1,
-    "fixed_by_commit": "4e0d251900fcdf13986dc8676f3f08934b743fcc",
-    "patched_attempt": 3,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4,
     "reopen_reason": "deterministic check failed after patch"
+  },
+  {
+    "id": "a4-1",
+    "category": "wrong_file",
+    "file": "package.json",
+    "description": "No root package.json declaring express, ejs, better-sqlite3 with a node src/server.js start script exists.",
+    "check": {
+      "kind": "file_exists",
+      "file": "package.json",
+      "expect": "present"
+    },
+    "status": "fixed",
+    "raised_attempt": 4,
+    "times_raised": 1,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4
+  },
+  {
+    "id": "a4-7",
+    "category": "wrong_behavior",
+    "file": "frontend/src/app/app.routes.ts",
+    "description": "Routing remains Angular client-side SPA routing rather than real server-rendered URLs as the plan requires.",
+    "check": {
+      "kind": "grep",
+      "file": "src/server.js",
+      "pattern": "app\\.get\\('/habits'",
+      "expect": "present"
+    },
+    "status": "fixed",
+    "raised_attempt": 4,
+    "times_raised": 1,
+    "fixed_by_commit": "b2236271cb28c30225d742e84456c443da3286b4",
+    "patched_attempt": 4
   }
 ]

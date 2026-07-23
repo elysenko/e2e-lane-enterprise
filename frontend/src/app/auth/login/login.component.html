@@ -1,0 +1,56 @@
+<main class="auth">
+  <section class="auth__card">
+    <div class="auth__brand">
+      <span class="auth__mark" aria-hidden="true">✓</span>
+      <span>Habit Tracker</span>
+    </div>
+    <h1 class="auth__title">Welcome back</h1>
+    <p class="auth__subtitle">Sign in to keep your streaks going.</p>
+
+    @if (error(); as e) {
+      <p class="auth__error" role="alert">{{ e }}</p>
+    }
+
+    <form (ngSubmit)="submit()">
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="you@example.com"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event)"
+        />
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="••••••••"
+          [ngModel]="password()"
+          (ngModelChange)="password.set($event)"
+        />
+      </div>
+
+      <button type="submit" class="btn btn--block">Sign in</button>
+    </form>
+
+    <p class="auth__switch">
+      New here? <a routerLink="/signup">Create an account</a>
+    </p>
+
+    <button type="button" class="auth__demo" (click)="demo()">
+      Skip login — Demo Mode
+    </button>
+
+    <p class="auth__admin">
+      Administrator? <a routerLink="/admin/login">Admin sign in</a>
+    </p>
+  </section>
+</main>
