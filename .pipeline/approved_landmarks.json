@@ -1,21 +1,25 @@
 {
   "testids": [
     "about-main",
-    "admin-settings-main",
+    "about-title",
+    "add-habit",
+    "add-habit-empty",
     "app-ready",
+    "habit-create",
     "habit-item-",
+    "habit-name",
+    "habit-name-input",
     "habit-new-main",
+    "habit-streak",
     "habits-main",
-    "service-"
+    "habits-title",
+    "nav-about",
+    "nav-habits"
   ],
   "headings": [
     "About Habit Tracker",
     "Add a habit",
-    "Admin \\xB7 Service Settings",
-    "Administrator sign in",
-    "Create your account",
-    "My Habits",
-    "Welcome back"
+    "My Habits"
   ],
-  "source_dir": "/workspace/mockups/3d1222a6-f7ff-474b-b129-0f0f856b1c0a"
+  "source_dir": "/workspace/mockups/7b63a6fd-5b03-5e07-a124-9f0913187055"
 }

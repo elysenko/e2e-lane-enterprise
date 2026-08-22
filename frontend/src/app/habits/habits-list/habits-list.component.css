@@ -98,38 +98,25 @@
   margin-bottom: var(--space-4);
 }
 
-/* Floating action button — mobile only, bottom half of screen */
-.fab {
-  display: none;
+/* The single "Add Habit" control lives in .page__head and must stay visible and
+   prominent at EVERY viewport width — there is no floating action button and no
+   media query that hides it, so exactly one match exists in all list states. */
+.page__head .btn {
+  flex: 0 0 auto;
+  box-shadow: var(--shadow-md);
 }
 
 @media (max-width: 768px) {
-  .add-btn--desktop {
-    display: none;
+  /* Stack the heading above a full-width Add Habit button rather than hiding it. */
+  .page__head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-4);
   }
 
-  .fab {
-    position: fixed;
-    right: var(--space-5);
-    bottom: calc(72px + var(--safe-bottom));
-    z-index: 25;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
+  .page__head .btn {
+    width: 100%;
     min-height: 52px;
-    padding: 0 var(--space-5);
-    border-radius: var(--radius-pill);
-    background: var(--color-primary);
-    color: var(--color-primary-contrast);
     font-weight: 700;
-    box-shadow: var(--shadow-lg);
-  }
-
-  .fab:active {
-    transform: scale(0.97);
-  }
-
-  .fab__label {
-    font-size: var(--font-size-base);
   }
 }

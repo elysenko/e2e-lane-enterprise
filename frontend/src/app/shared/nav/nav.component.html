@@ -1,4 +1,5 @@
-<!-- Desktop top bar -->
+<!-- Desktop top bar. No authentication (per spec): there is no user name, no admin
+     link and no "Sign out" affordance anywhere — a visitor has no account to leave. -->
 <header class="topbar">
   <a class="brand" routerLink="/habits">
     <span class="brand__mark" aria-hidden="true">✓</span>
@@ -6,24 +7,16 @@
   </a>
 
   <nav class="topbar__links" aria-label="Primary">
-    <a routerLink="/habits" routerLinkActive="is-active">Habits</a>
-    <a routerLink="/about" routerLinkActive="is-active">About</a>
-    @if (auth.isAdmin()) {
-      <a routerLink="/admin/settings" routerLinkActive="is-active">Admin</a>
-    }
+    <a data-testid="nav-habits" routerLink="/habits" routerLinkActive="is-active"
+      >Habits</a
+    >
+    <a data-testid="nav-about" routerLink="/about" routerLinkActive="is-active"
+      >About</a
+    >
   </nav>
-
-  <div class="topbar__end">
-    @if (auth.user(); as u) {
-      <span class="topbar__user">{{ u.name }}</span>
-      <button type="button" class="topbar__logout" (click)="logout()">
-        Sign out
-      </button>
-    }
-  </div>
 </header>
 
-<!-- Mobile bottom tab bar (≤3 primary items → tabs) -->
+<!-- Mobile bottom tab bar (2 primary items → tabs, not a drawer) -->
 <nav class="tabbar" aria-label="Primary mobile">
   <a class="tabbar__item" routerLink="/habits" routerLinkActive="is-active">
     <span class="tabbar__icon" aria-hidden="true">🔥</span>
@@ -33,18 +26,4 @@
     <span class="tabbar__icon" aria-hidden="true">ℹ️</span>
     <span class="tabbar__label">About</span>
   </a>
-  @if (auth.isAdmin()) {
-    <a
-      class="tabbar__item"
-      routerLink="/admin/settings"
-      routerLinkActive="is-active"
-    >
-      <span class="tabbar__icon" aria-hidden="true">⚙️</span>
-      <span class="tabbar__label">Admin</span>
-    </a>
-  }
-  <button type="button" class="tabbar__item" (click)="logout()">
-    <span class="tabbar__icon" aria-hidden="true">⎋</span>
-    <span class="tabbar__label">Sign out</span>
-  </button>
 </nav>

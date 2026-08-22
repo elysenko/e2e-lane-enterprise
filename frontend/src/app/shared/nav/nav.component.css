@@ -17,6 +17,8 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
+  /* Tappable link back to /habits — keep it at the 44px touch minimum. */
+  min-height: 44px;
   font-weight: 800;
   font-size: var(--font-size-lg);
 }
@@ -41,6 +43,9 @@
 }
 
 .topbar__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-md);
   color: var(--color-text-muted);
@@ -57,41 +62,13 @@
   color: var(--color-primary);
 }
 
-.topbar__end {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.topbar__user {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-}
-
-.topbar__logout {
-  min-height: 40px;
-  padding: 0 var(--space-3);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.topbar__logout:hover {
-  background: var(--color-surface-alt);
-}
-
 /* ---------- Mobile bottom tab bar ---------- */
 .tabbar {
   display: none;
 }
 
 @media (max-width: 768px) {
-  .topbar__links,
-  .topbar__end {
+  .topbar__links {
     display: none;
   }
 

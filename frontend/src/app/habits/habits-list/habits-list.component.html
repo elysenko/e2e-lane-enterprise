@@ -2,28 +2,36 @@
 
 <main class="page" data-testid="habits-main">
   <div class="page__head">
-    <div>
-      <h1>My Habit Tracker</h1>
+    <div class="page__headings">
+      <h1 data-testid="habits-title">My Habits</h1>
       <p class="page__sub">
         Keep the momentum — your best run is {{ bestStreak() }} days.
       </p>
     </div>
-    <a class="btn add-btn--desktop" routerLink="/habits/new">+ New Habit</a>
+    <!-- The ONLY control with the accessible name "Add Habit". Playwright runs in
+         strict mode, so a second element with this name would break the gate. The
+         empty-state link below is deliberately worded "Add your first habit". -->
+    <a class="btn" data-testid="add-habit" routerLink="/habits/new">Add Habit</a>
   </div>
 
   @if (habits().length === 0) {
     <div class="empty">
       <p>No habits yet. Add your first one to get started.</p>
-      <a class="btn" routerLink="/habits/new">+ New Habit</a>
+      <a class="btn" data-testid="add-habit-empty" routerLink="/habits/new"
+        >Add your first habit</a
+      >
     </div>
   } @else {
     <ul class="habits">
       @for (habit of habits(); track habit.id) {
         <li class="habit" [attr.data-testid]="'habit-item-' + habit.id">
           <div class="habit__body">
-            <span class="habit__name">{{ habit.name }}</span>
+            <span class="habit__name" data-testid="habit-name">{{
+              habit.name
+            }}</span>
             <span
               class="habit__streak"
+              data-testid="habit-streak"
               [class.habit__streak--zero]="habit.streak === 0"
             >
               🔥 {{ habit.streak }} day streak
@@ -35,9 +43,3 @@
     </ul>
   }
 </main>
-
-<!-- Primary action anchored to the bottom half for one-handed mobile use -->
-<a class="fab" routerLink="/habits/new" aria-label="New habit">
-  <span aria-hidden="true">+</span>
-  <span class="fab__label">New Habit</span>
-</a>

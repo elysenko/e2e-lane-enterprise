@@ -1,20 +1,19 @@
 import { Routes } from '@angular/router';
 
+/**
+ * Every route is public and deep-linkable — the spec mandates no authentication,
+ * so there are no /login, /signup or /admin/* routes and no guards. Those paths
+ * fall through the `**` wildcard to the habit list.
+ *
+ * `data.flow` names the user journey each route serves so the surface contract
+ * and the acceptance gates can address every screen by URL.
+ */
 export const routes: Routes = [
-  // No authentication (per spec): the root URL lands directly on the habit list.
+  // The root URL lands directly on the habit list.
   { path: '', pathMatch: 'full', redirectTo: 'habits' },
   {
-    path: 'login',
-    loadComponent: () =>
-      import('./auth/login/login.component').then((m) => m.LoginComponent),
-  },
-  {
-    path: 'signup',
-    loadComponent: () =>
-      import('./auth/signup/signup.component').then((m) => m.SignupComponent),
-  },
-  {
     path: 'habits',
+    data: { flow: 'habits-list' },
     loadComponent: () =>
       import('./habits/habits-list/habits-list.component').then(
         (m) => m.HabitsListComponent,
@@ -22,6 +21,7 @@ export const routes: Routes = [
   },
   {
     path: 'habits/new',
+    data: { flow: 'habit-create' },
     loadComponent: () =>
       import('./habits/habit-new/habit-new.component').then(
         (m) => m.HabitNewComponent,
@@ -29,22 +29,9 @@ export const routes: Routes = [
   },
   {
     path: 'about',
+    data: { flow: 'about' },
     loadComponent: () =>
       import('./about/about.component').then((m) => m.AboutComponent),
-  },
-  {
-    path: 'admin/login',
-    loadComponent: () =>
-      import('./admin/admin-login/admin-login.component').then(
-        (m) => m.AdminLoginComponent,
-      ),
-  },
-  {
-    path: 'admin/settings',
-    loadComponent: () =>
-      import('./admin/admin-settings/admin-settings.component').then(
-        (m) => m.AdminSettingsComponent,
-      ),
   },
   { path: '**', redirectTo: 'habits' },
 ];

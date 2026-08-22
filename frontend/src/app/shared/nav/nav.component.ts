@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../core/auth.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
+/**
+ * Persistent app chrome: a sticky top bar on desktop and a fixed bottom tab bar
+ * on mobile. The app has no authentication (per spec), so this component holds
+ * no session state — it is pure navigation between /habits and /about.
+ */
 @Component({
   selector: 'app-nav',
   standalone: true,
@@ -10,12 +14,4 @@ import { AuthService } from '../../core/auth.service';
   styleUrl: './nav.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavComponent {
-  private readonly router = inject(Router);
-  protected readonly auth = inject(AuthService);
-
-  logout(): void {
-    this.auth.logout();
-    this.router.navigate(['/login']);
-  }
-}
+export class NavComponent {}
