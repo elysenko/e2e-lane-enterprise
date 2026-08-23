@@ -26,7 +26,16 @@
 
     <div class="actions">
       <a class="btn btn--ghost" routerLink="/habits">Cancel</a>
-      <button type="submit" class="btn" data-testid="habit-create">
+      <!-- Disabled while POST /api/habits is in flight so a double-click cannot
+           create the habit twice. The label stays "Create" throughout — the
+           accessible name is a stable selector for the acceptance gate. -->
+      <button
+        type="submit"
+        class="btn"
+        data-testid="habit-create"
+        [disabled]="submitting()"
+        [attr.aria-busy]="submitting() ? 'true' : null"
+      >
         Create
       </button>
     </div>

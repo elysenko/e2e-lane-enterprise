@@ -79,6 +79,17 @@ button {
   transform: scale(0.98);
 }
 
+/* In-flight state: buttons are disabled while their request is outstanding
+   (e.g. Create during POST /api/habits), so the cursor and contrast must show
+   the control is not accepting a second click. */
+.btn:disabled,
+.btn[disabled] {
+  background: var(--color-border-strong);
+  color: var(--color-surface);
+  cursor: not-allowed;
+  transform: none;
+}
+
 .btn--block {
   width: 100%;
 }

@@ -35,8 +35,13 @@ export class HabitsService implements OnModuleInit {
   }
 
   async findAll(): Promise<HabitResponse[]> {
+    // `id` is a tiebreaker, not decoration: the three seed rows are written by a
+    // single createMany and therefore share one `createdAt` to the millisecond.
+    // Ordering on createdAt alone leaves their relative order up to Postgres,
+    // so the list could come back in a different order on each request and any
+    // position-based assertion would flake. The second key makes it total.
     const habits = await this.prisma.habit.findMany({
-      orderBy: { createdAt: 'desc' },
+      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
     });
     return habits.map((h) => this.toResponse(h));
   }

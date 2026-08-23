@@ -85,6 +85,57 @@
   font-size: var(--font-size-xl);
 }
 
+/* Loading / error states for the live GET /api/habits call. They reuse the
+   empty state's card geometry so the page does not jump as the request settles. */
+.status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.status p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.status__spinner {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  animation: status-spin 0.8s linear infinite;
+}
+
+@keyframes status-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Respect users who ask for reduced motion: keep the indicator, drop the spin. */
+@media (prefers-reduced-motion: reduce) {
+  .status__spinner {
+    animation: none;
+  }
+}
+
+.status--error {
+  background: var(--color-danger-soft);
+  border-color: var(--color-danger);
+}
+
+.status--error p {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
 .empty {
   text-align: center;
   padding: var(--space-8) var(--space-4);

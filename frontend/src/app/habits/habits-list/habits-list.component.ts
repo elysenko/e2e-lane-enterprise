@@ -22,30 +22,23 @@ import { HabitsApi } from '../../shared/api/habits-api.service';
 export class HabitsListComponent implements OnInit {
   private readonly habitsApi = inject(HabitsApi);
 
-  // Backend-owned data. Seeded here with the same three habits the backend's
-  // HabitsService.SEED_HABITS inserts on first boot, so the list renders
-  // populated in the static preview (which has no API server) and reviewers
-  // see the real design rather than an accidental empty state.
-  habits = signal<Habit[]>([
-    {
-      id: '1',
-      name: 'Drink water',
-      streak: 5,
-      created_at: '2026-08-17T08:00:00.000Z',
-    },
-    {
-      id: '2',
-      name: 'Read 20 minutes',
-      streak: 2,
-      created_at: '2026-08-20T08:00:00.000Z',
-    },
-    {
-      id: '3',
-      name: 'Morning walk',
-      streak: 0,
-      created_at: '2026-08-22T08:00:00.000Z',
-    },
-  ]);
+  /**
+   * Live, backend-owned data — never placeholder rows.
+   *
+   * The list starts EMPTY and is filled only by `GET /api/habits`. It must not
+   * be pre-seeded with example habits: fabricated rows would render as if the
+   * API had answered, so a broken backend (bad DATABASE_URL, crash-looping
+   * pod, 502 from nginx) would look identical to a healthy one and the deploy
+   * gate would pass on a dead app. The three example habits a visitor sees on
+   * a fresh deploy come from the real database via
+   * HabitsService.onModuleInit's seed, not from here.
+   */
+  habits = signal<Habit[]>([]);
+
+  /** True while GET /api/habits is in flight — drives the loading state. */
+  loading = signal(true);
+
+  /** Set when the request fails, so the UI can say so instead of lying "no habits yet". */
   error = signal<string | null>(null);
 
   bestStreak = computed(() =>
@@ -53,13 +46,23 @@ export class HabitsListComponent implements OnInit {
   );
 
   async ngOnInit(): Promise<void> {
+    await this.load();
+  }
+
+  /** Fetch the live list; also the retry handler for the error state. */
+  async load(): Promise<void> {
+    this.loading.set(true);
+    this.error.set(null);
     try {
       this.habits.set(await this.habitsApi.listHabits());
     } catch {
-      // Leave whatever the signal already holds. Against the live backend that
-      // initial value is empty, so a failed GET /api/habits renders the empty
-      // state (never a crash); in the static preview it keeps the seed rows.
-      this.error.set('Could not load habits.');
+      // Distinct from "no habits yet": the request failed, so we know nothing
+      // about the real list. Show the failure (with a retry) rather than an
+      // empty state that would misreport an outage as "you have no habits".
+      this.habits.set([]);
+      this.error.set('Could not load your habits. Please try again.');
+    } finally {
+      this.loading.set(false);
     }
   }
 }

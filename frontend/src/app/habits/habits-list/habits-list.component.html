@@ -14,7 +14,24 @@
     <a class="btn" data-testid="add-habit" routerLink="/habits/new">Add Habit</a>
   </div>
 
-  @if (habits().length === 0) {
+  <!-- Four mutually exclusive states for the live GET /api/habits call:
+       in flight -> failed -> genuinely empty -> loaded. "Empty" and "failed" are
+       kept separate on purpose: an API outage must not be reported to the
+       visitor as "you have no habits yet". -->
+  @if (loading()) {
+    <div class="status" data-testid="habits-loading" role="status" aria-busy="true">
+      <span class="status__spinner" aria-hidden="true"></span>
+      <p>Loading your habits…</p>
+    </div>
+  } @else if (error()) {
+    <!-- `as` aliasing is only valid on @if, not @else if — read the signal directly. -->
+    <div class="status status--error" data-testid="habits-error" role="alert">
+      <p>{{ error() }}</p>
+      <button type="button" class="btn" data-testid="habits-retry" (click)="load()">
+        Retry
+      </button>
+    </div>
+  } @else if (habits().length === 0) {
     <div class="empty">
       <p>No habits yet. Add your first one to get started.</p>
       <a class="btn" data-testid="add-habit-empty" routerLink="/habits/new"
