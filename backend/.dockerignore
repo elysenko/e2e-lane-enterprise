@@ -1,3 +1,9 @@
 node_modules
 dist
 .env*
+# TypeScript incremental cache. MUST be excluded: `nest build` deletes dist/
+# first (deleteOutDir), and if a stale *.tsbuildinfo is copied into the image
+# tsc concludes everything is already up to date and emits nothing — the build
+# still exits 0 but dist/main.js never appears, so the container dies at
+# startup with "Cannot find module '/app/dist/main.js'".
+*.tsbuildinfo
