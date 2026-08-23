@@ -1,0 +1,30 @@
+# deploy/values-postgresql.yaml
+# Bitnami PostgreSQL Helm chart values.
+#
+# NOTE: This instance is ALREADY PROVISIONED AND RUNNING as Helm release
+# "postgres" in namespace "colossus-e2e-lane-enterprise-staging"
+# (service: postgres-postgresql.colossus-e2e-lane-enterprise-staging.svc.cluster.local).
+#
+# The values below intentionally mirror the LIVE instance so that re-running
+# helm upgrade is a no-op. Do NOT change the password here: the running app
+# reads DATABASE_URL from the "app-secrets" secret, and rotating this value
+# would break every existing connection.
+#
+#   helm upgrade --install postgres bitnami/postgresql \
+#     -f deploy/values-postgresql.yaml -n colossus-e2e-lane-enterprise-staging
+
+auth:
+  postgresPassword: "Fl8cJ4SbIdlOjRCsHZ0yoa5x"
+  database: app
+
+primary:
+  persistence:
+    size: 5Gi
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

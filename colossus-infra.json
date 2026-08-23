@@ -1,0 +1,11 @@
+{
+  "_note": "PostgreSQL is already provisioned and Running. These are the LIVE credentials matching the deployed instance -- do not regenerate or rotate them.",
+  "postgres": {
+    "host": "postgres-postgresql.colossus-e2e-lane-enterprise-staging.svc.cluster.local",
+    "port": 5432,
+    "user": "postgres",
+    "password": "Fl8cJ4SbIdlOjRCsHZ0yoa5x",
+    "database": "app",
+    "url": "postgresql://postgres:Fl8cJ4SbIdlOjRCsHZ0yoa5x@postgres-postgresql.colossus-e2e-lane-enterprise-staging.svc.cluster.local:5432/app"
+  }
+}
