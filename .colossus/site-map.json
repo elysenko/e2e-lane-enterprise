@@ -1,0 +1,35 @@
+{
+  "site": {
+    "name": "tu-prep-r6rb3r96",
+    "site_id": "tu-prep-r6rb3r96"
+  },
+  "meta": {
+    "generated_by": "declared"
+  },
+  "front_end": {
+    "pages": [
+      {
+        "name": "About",
+        "page_id": "about",
+        "url": "/about",
+        "linked_page_ids": []
+      },
+      {
+        "name": "Habits",
+        "page_id": "habits",
+        "url": "/habits",
+        "linked_page_ids": []
+      },
+      {
+        "name": "New",
+        "page_id": "habits-new",
+        "url": "/habits/new",
+        "linked_page_ids": []
+      }
+    ]
+  },
+  "back_end": {
+    "tables": []
+  },
+  "generated_by": "declared"
+}
